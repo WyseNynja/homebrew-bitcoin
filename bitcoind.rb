@@ -3,15 +3,19 @@ require 'formula'
 class Bitcoind < Formula
   homepage 'http://bitcoin.org/'
   head 'https://github.com/bitcoin/bitcoin/archive/master.tar.gz'
-  url 'https://github.com/bitcoin/bitcoin/archive/v0.7.1.tar.gz'
-  sha1 'df22ba6d4a1f6afa01c21f28316a2cb498290255'
-  version '0.7.1'
+  url 'https://github.com/bitcoin/bitcoin/archive/v0.7.2.tar.gz'
+  sha1 '6afb648f273a52934a65d8a127a08dccdb74db48'
+  version '0.7.2'
+
   depends_on 'boost'
   depends_on 'berkeley-db4'
+  depends_on 'miniupnpc' if build.include? 'with-upnp'
+
+  option 'with-upnp', 'Compile with UPnP support'
 
   def install
     cd "src" do
-        system "make -f makefile.osx USE_UPNP= DEPSDIR=#{HOMEBREW_PREFIX}"
+        system "make -f makefile.osx #{"USE_UPNP=" unless build.include? 'with-upnp'} DEPSDIR=#{HOMEBREW_PREFIX}"
         system "strip bitcoind"
         bin.install "bitcoind"
     end
