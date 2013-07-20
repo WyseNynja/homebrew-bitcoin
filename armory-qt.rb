@@ -3,8 +3,8 @@ require 'formula'
 class ArmoryQt < Formula
   homepage 'http://bitcoinarmory.com/'
   head 'https://github.com/etotheipi/BitcoinArmory.git'
-  url 'https://github.com/etotheipi/BitcoinArmory.git', :tag => 'v0.87.2-beta'
-  version '0.87.2-beta'
+  url 'https://github.com/etotheipi/BitcoinArmory.git', :tag => 'v0.88-beta'
+  version '0.88-beta'
 
   devel do
     url 'https://github.com/etotheipi/BitcoinArmory.git', :branch => 'testing'
