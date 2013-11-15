@@ -9,6 +9,9 @@ class Bitcoind < Formula
   devel do
     url 'https://github.com/bitcoin/bitcoin.git', :branch => 'master'
     version 'master'
+
+    depends_on 'automake'
+    depends_on 'pkg-config'
   end
 
   depends_on 'berkeley-db4'
@@ -20,29 +23,39 @@ class Bitcoind < Formula
   option 'without-ipv6', 'Compile without IPv6 support'
 
   def patches
-    # fix include and lib paths for berkeley-db4 and openssl
-    DATA
+    unless build.devel?
+      # fix include and lib paths for berkeley-db4 and openssl
+      DATA
+    end
   end
 
   def install
     ENV['CPPFLAGS'] = "-I/usr/local/opt/openssl/include"
     ENV['LDFLAGS'] = "-L/usr/local/opt/openssl/lib"
 
-    cd "src" do
-      system "make", "-f", "makefile.osx",
-        "DEPSDIR=#{HOMEBREW_PREFIX}",
-        "USE_UPNP=#{(build.include? 'with-upnp') ? '1' : '-'}",
-        "USE_IPV6=#{(build.include? 'without-ipv6') ? '-' : '1'}"
-      system "strip bitcoind"
-      bin.install "bitcoind"
+    if build.devel?
+      system "sh", "autogen.sh"
+      system "./configure", "--prefix=#{prefix}"
+      system "make"
+      system "strip src/bitcoind"
+      bin.install "src/bitcoind"
+    else
+      cd "src" do
+        system "make", "-f", "makefile.osx",
+          "DEPSDIR=#{HOMEBREW_PREFIX}",
+          "USE_UPNP=#{(build.include? 'with-upnp') ? '1' : '-'}",
+          "USE_IPV6=#{(build.include? 'without-ipv6') ? '-' : '1'}"
+        system "strip bitcoind"
+        bin.install "bitcoind"
+      end
     end
   end
 
   def caveats; <<-EOS.undent
     You will need to setup your bitcoin.conf if you haven't already done so:
 
-    echo -e "rpcuser=bitcoinrpc\nrpcpassword=$(xxd -l 16 -p /dev/urandom)" > "~/Library/Application Support/Bitcoin/bitcoin.conf"
-    chmod 600 "~/Library/Application Support/Bitcoin/bitcoin.conf"
+    echo -e "rpcuser=bitcoinrpc\\nrpcpassword=$(xxd -l 16 -p /dev/urandom)" > ~/Library/Application\\ Support/Bitcoin/bitcoin.conf
+    chmod 600 ~/Library/Application\\ Support/Bitcoin/bitcoin.conf
     EOS
   end
 end
