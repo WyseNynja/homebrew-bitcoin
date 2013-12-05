@@ -10,6 +10,7 @@ class Libbitcoin < Formula
   depends_on 'homebrew/versions/gcc48' => :build
   depends_on 'pkg-config' => :build
 
+  depends_on 'libtool'
   depends_on 'curl'  # todo: should this use gcc48?
   depends_on 'openssl'  # todo: should this use gcc48?
   depends_on 'WyseNynja/bitcoin/boost-gcc48' => 'c++11'
@@ -27,6 +28,7 @@ class Libbitcoin < Formula
   end
 
   def install
+    ENV.prepend_path 'PATH', "#{HOMEBREW_PREFIX}/bin"
     ENV.prepend_path 'PATH', "#{HOMEBREW_PREFIX}/opt/gcc48/bin"
     ENV['CC'] = "gcc-4.8"
     ENV['CXX'] = ENV['LD'] = "g++-4.8"
