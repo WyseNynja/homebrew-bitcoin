@@ -3,7 +3,7 @@ require 'formula'
 class Libwallet < Formula
   homepage 'https://github.com/spesmilo/libwallet'
   url 'https://github.com/spesmilo/libwallet.git', :tag => 'v0.4'
-  head 'https://github.com/spesmilo/libwallet.git', :tag => 'master'
+  head 'https://github.com/spesmilo/libwallet.git', :branch => 'master'
 
   depends_on 'autoconf' => :build
   depends_on 'automake' => :build
