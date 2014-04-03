@@ -12,8 +12,8 @@ class Sx < Formula
 
   depends_on 'qrencode' => :recommended
   depends_on 'Nevtep/bitcoin/boost-gcc48' => 'c++11'
-  depends_on 'Nevtep/bitcoin/libwallet'
   depends_on 'Nevtep/bitcoin/libbitcoin'
+  depends_on 'Nevtep/bitcoin/libwallet'
   depends_on 'Nevtep/bitcoin/libconfig-gcc48'
   depends_on 'Nevtep/bitcoin/zeromq2-gcc48'
   depends_on 'Nevtep/bitcoin/obelisk'
