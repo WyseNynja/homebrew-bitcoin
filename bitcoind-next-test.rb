@@ -4,7 +4,7 @@ class BitcoindNextTest < Formula
   homepage 'http://bitcoin.org/'
   head 'https://github.com/luke-jr/bitcoin.git', :branch => 'next-test'
 
-  keg_only "conflicts with WyseNynja/bitcoin/bitcoind"
+  keg_only "conflicts with Nevtep/bitcoin/bitcoind"
 
   depends_on 'boost'
   depends_on 'berkeley-db4'
