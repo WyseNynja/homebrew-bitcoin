@@ -3,7 +3,7 @@ require 'formula'
 class Libbitcoin < Formula
   homepage 'https://github.com/spesmilo/libbitcoin'
   url 'https://github.com/spesmilo/libbitcoin.git', :tag => 'v2.0'
-  head 'https://github.com/spesmilo/libbitcoin.git', :tag => 'master'
+  head 'https://github.com/spesmilo/libbitcoin.git', :branch => 'master'
 
   depends_on 'autoconf' => :build
   depends_on 'automake' => :build
