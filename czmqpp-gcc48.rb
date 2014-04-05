@@ -2,11 +2,12 @@ require 'formula'
 
 class CzmqppGcc48 < Formula
   homepage 'https://github.com/zeromq/czmqpp'
-  url 'https://github.com/zeromq/czmqpp.git', :branch => 'master' 
+  url 'https://github.com/zeromq/czmqpp'
+  sha1 '9e4945b8db0508b0b3d70fc192ed79895a50680d'
+  version '2.2'
   
   depends_on 'autoconf' => :build
   depends_on 'automake' => :build
-  depends_on 'homebrew/versions/gcc48' => :build
   depends_on 'libtool' => :build
   depends_on 'pkg-config' => :build
 
