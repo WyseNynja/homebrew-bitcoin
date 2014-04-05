@@ -24,8 +24,16 @@ class Obelisk < Formula
 
     # I thought depends_on libsodium would be enough, but I guess not...
     libsodium = Formula.factory('libsodium')
-    ENV.append 'CPPFLAGS', "-I#{libsodium.include}"
-    ENV.append 'LDFLAGS', "-L#{libsodium.lib}"
+    ENV.append 'libsodium_CFLAGS', "-I#{libsodium.include}"
+    ENV.append 'libsodium_LIBS', "-L#{libsodium.lib}"
+    
+    # I thought depends_on libsodium would be enough, but I guess not...
+    libczmq = Formula.factory('Nevtep/bitcoin/zeromq2-gcc48')
+    ENV.append 'libczmq_CFLAGS', "-I#{libczmq.include}"
+    ENV.append 'libczmq_LIBS', "-L#{libczmq.lib}"
+    
+    ENV.append 'libczmqpp_CFLAGS', "-I#{libczmq.include}"
+    ENV.append 'libczmqpp_LIBS', "-L#{libczmq.lib}"
     
     # I thought depends_on libbitcoin would be enough, but I guess not...
     libbitcoin = Formula.factory('Nevtep/bitcoin/libbitcoin')
