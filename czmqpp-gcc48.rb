@@ -2,7 +2,7 @@ require 'formula'
 
 class CzmqppGcc48 < Formula
   homepage 'https://github.com/zeromq/czmqpp'
-  url 'https://github.com/zeromq/czmqpp/czmqpp.git', :branch => 'master' 
+  url 'https://github.com/zeromq/czmqpp.git', :branch => 'master' 
   
   depends_on 'autoconf' => :build
   depends_on 'automake' => :build
