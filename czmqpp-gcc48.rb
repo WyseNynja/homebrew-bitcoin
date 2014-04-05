@@ -1,6 +1,6 @@
 require 'formula'
 
-class czmqppgcc48 < Formula
+class CZmqppGcc48 < Formula
   homepage 'https://github.com/zeromq/czmqpp'
   url 'https://github.com/zeromq/czmqpp', :branch => 'master'
 
