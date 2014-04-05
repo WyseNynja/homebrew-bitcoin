@@ -11,6 +11,7 @@ class Obelisk < Formula
   depends_on 'libtool' => :build
   depends_on 'pkg-config' => :build
 
+  depends_on 'libsodium'
   depends_on 'Nevtep/bitcoin/libbitcoin'
   depends_on 'Nevtep/bitcoin/libconfig-gcc48'
   depends_on 'Nevtep/bitcoin/zeromq2-gcc48'
@@ -21,6 +22,11 @@ class Obelisk < Formula
     ENV['CXX'] = ENV['LD'] = "g++-4.8"
     ENV.cxx11
 
+    # I thought depends_on libsodium would be enough, but I guess not...
+    libsodium = Formula.factory('libsodium')
+    ENV.append 'CPPFLAGS', "-I#{libsodium.include}"
+    ENV.append 'LDFLAGS', "-L#{libsodium.lib}"
+    
     # I thought depends_on libbitcoin would be enough, but I guess not...
     libbitcoin = Formula.factory('Nevtep/bitcoin/libbitcoin')
     ENV.append 'CPPFLAGS', "-I#{libbitcoin.include}"
