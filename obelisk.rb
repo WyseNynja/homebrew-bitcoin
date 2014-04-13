@@ -11,10 +11,10 @@ class Obelisk < Formula
   depends_on 'libtool' => :build
   depends_on 'pkg-config' => :build
 
-  depends_on 'libsodium'
   depends_on 'Nevtep/bitcoin/libbitcoin'
   depends_on 'Nevtep/bitcoin/libconfig-gcc48'
   depends_on 'Nevtep/bitcoin/zeromq2-gcc48'
+  depends_on 'Nevtep/bitcoin/czmqpp-gcc48'
 
   def install
     ENV.prepend_path 'PATH', "#{HOMEBREW_PREFIX}/opt/gcc48/bin"
@@ -22,19 +22,6 @@ class Obelisk < Formula
     ENV['CXX'] = ENV['LD'] = "g++-4.8"
     ENV.cxx11
 
-    # I thought depends_on libsodium would be enough, but I guess not...
-    libsodium = Formula.factory('libsodium')
-    ENV.append 'libsodium_CFLAGS', "-I#{libsodium.include}"
-    ENV.append 'libsodium_LIBS', "-L#{libsodium.lib}"
-    
-    # I thought depends_on libsodium would be enough, but I guess not...
-    libczmq = Formula.factory('Nevtep/bitcoin/zeromq2-gcc48')
-    ENV.append 'libczmq_CFLAGS', "-I#{libczmq.include}"
-    ENV.append 'libczmq_LIBS', "-L#{libczmq.lib}"
-    
-    ENV.append 'libczmqpp_CFLAGS', "-I#{libczmq.include}"
-    ENV.append 'libczmqpp_LIBS', "-L#{libczmq.lib}"
-    
     # I thought depends_on libbitcoin would be enough, but I guess not...
     libbitcoin = Formula.factory('Nevtep/bitcoin/libbitcoin')
     ENV.append 'CPPFLAGS', "-I#{libbitcoin.include}"
