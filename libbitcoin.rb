@@ -3,7 +3,7 @@ require 'formula'
 class Libbitcoin < Formula
   homepage 'https://github.com/spesmilo/libbitcoin'
   url 'https://github.com/spesmilo/libbitcoin.git', :tag => 'v2.0'
-  head 'https://github.com/spesmilo/libbitcoin.git', :tag => 'master'
+  head 'https://github.com/spesmilo/libbitcoin.git', :branch => 'master'
 
   depends_on 'autoconf' => :build
   depends_on 'automake' => :build
@@ -13,8 +13,8 @@ class Libbitcoin < Formula
 
   depends_on 'curl'  # todo: should this use gcc48?
   depends_on 'openssl'  # todo: should this use gcc48?
-  depends_on 'WyseNynja/bitcoin/boost-gcc48' => 'c++11'
-  depends_on 'WyseNynja/bitcoin/leveldb-gcc48'  # todo: make this optional
+  depends_on 'Nevtep/bitcoin/boost-gcc48' => 'c++11'
+  depends_on 'Nevtep/bitcoin/leveldb-gcc48'  # todo: make this optional
 
   option 'enable-testnet', "Enable testnet"
   option 'enable-debug', "Enable debug"
@@ -34,7 +34,7 @@ class Libbitcoin < Formula
     ENV.cxx11
 
     # I thought depends_on boost-gcc48 would be enough, but I guess not...
-    boostgcc48 = Formula.factory('WyseNynja/bitcoin/boost-gcc48')
+    boostgcc48 = Formula.factory('Nevtep/bitcoin/boost-gcc48')
     ENV.append 'CPPFLAGS', "-I#{boostgcc48.include}"
     ENV.append 'LDFLAGS', "-L#{boostgcc48.lib}"
 
@@ -53,7 +53,7 @@ class Libbitcoin < Formula
     ENV.append 'LDFLAGS', "-L#{openssl.lib}"
 
     # I thought depends_on leveldb-gcc48 would be enough, but I guess not...
-    leveldbgcc48 = Formula.factory('WyseNynja/bitcoin/leveldb-gcc48')
+    leveldbgcc48 = Formula.factory('Nevtep/bitcoin/leveldb-gcc48')
     ENV.append 'CPPFLAGS', "-I#{leveldbgcc48.include}"
     ENV.append 'LDFLAGS', "-L#{leveldbgcc48.lib}"
 

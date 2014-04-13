@@ -3,7 +3,7 @@ require 'formula'
 class Libwallet < Formula
   homepage 'https://github.com/spesmilo/libwallet'
   url 'https://github.com/spesmilo/libwallet.git', :tag => 'v0.4'
-  head 'https://github.com/spesmilo/libwallet.git', :tag => 'master'
+  head 'https://github.com/spesmilo/libwallet.git', :branch => 'master'
 
   depends_on 'autoconf' => :build
   depends_on 'automake' => :build
@@ -13,8 +13,8 @@ class Libwallet < Formula
 
   depends_on 'curl'  # todo: should this use gcc48?
   depends_on 'openssl'  # todo: should this use gcc48?
-  depends_on 'WyseNynja/bitcoin/boost-gcc48' => 'c++11'
-  depends_on 'WyseNynja/bitcoin/leveldb-gcc48'  # todo: make this optional
+  depends_on 'Nevtep/bitcoin/boost-gcc48' => 'c++11'
+  depends_on 'Nevtep/bitcoin/leveldb-gcc48'  # todo: make this optional
 
   option 'enable-testnet', "Enable testnet"
   option 'enable-debug', "Enable debug"
@@ -26,7 +26,7 @@ class Libwallet < Formula
     ENV.cxx11
 
     # I thought depends_on libbitcoin would be enough, but I guess not...
-    libbitcoin = Formula.factory('WyseNynja/bitcoin/libbitcoin')
+    libbitcoin = Formula.factory('Nevtep/bitcoin/libbitcoin')
     ENV.append 'libbitcoin_CFLAGS', "-I#{libbitcoin.include}"
     ENV.append 'libbitcoin_LIBS', "-L#{libbitcoin.lib}"
 

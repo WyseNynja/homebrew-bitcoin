@@ -11,9 +11,10 @@ class Obelisk < Formula
   depends_on 'libtool' => :build
   depends_on 'pkg-config' => :build
 
-  depends_on 'WyseNynja/bitcoin/libbitcoin'
-  depends_on 'WyseNynja/bitcoin/libconfig-gcc48'
-  depends_on 'WyseNynja/bitcoin/zeromq2-gcc48'
+  depends_on 'Nevtep/bitcoin/libbitcoin'
+  depends_on 'Nevtep/bitcoin/libconfig-gcc48'
+  depends_on 'Nevtep/bitcoin/zeromq2-gcc48'
+  depends_on 'Nevtep/bitcoin/czmqpp-gcc48'
 
   def install
     ENV.prepend_path 'PATH', "#{HOMEBREW_PREFIX}/opt/gcc48/bin"
@@ -22,17 +23,17 @@ class Obelisk < Formula
     ENV.cxx11
 
     # I thought depends_on libbitcoin would be enough, but I guess not...
-    libbitcoin = Formula.factory('WyseNynja/bitcoin/libbitcoin')
+    libbitcoin = Formula.factory('Nevtep/bitcoin/libbitcoin')
     ENV.append 'CPPFLAGS', "-I#{libbitcoin.include}"
     ENV.append 'LDFLAGS', "-L#{libbitcoin.lib}"
 
     # I thought depends_on libconfig-gcc48 would be enough, but I guess not...
-    libconfiggcc48 = Formula.factory('WyseNynja/bitcoin/libconfig-gcc48')
+    libconfiggcc48 = Formula.factory('Nevtep/bitcoin/libconfig-gcc48')
     ENV.append 'CPPFLAGS', "-I#{libconfiggcc48.include}"
     ENV.append 'LDFLAGS', "-L#{libconfiggcc48.lib}"
 
     # I thought depends_on zermoq-gcc48 would be enough, but I guess not...
-    zeromq2gcc48 = Formula.factory('WyseNynja/bitcoin/zeromq2-gcc48')
+    zeromq2gcc48 = Formula.factory('Nevtep/bitcoin/zeromq2-gcc48')
     ENV.append 'CPPFLAGS', "-I#{zeromq2gcc48.include}"
     ENV.append 'LDFLAGS', "-L#{zeromq2gcc48.lib}"
 

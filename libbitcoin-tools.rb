@@ -8,7 +8,7 @@ class LibbitcoinTools < Formula
   depends_on 'homebrew/versions/gcc48' => :build
   depends_on 'pkg-config' => :build
 
-  depends_on 'WyseNynja/bitcoin/libbitcoin'
+  depends_on 'Nevtep/bitcoin/libbitcoin'
 
   def install
     ENV.prepend_path 'PATH', "#{HOMEBREW_PREFIX}/opt/gcc48/bin"
