@@ -11,7 +11,8 @@ class CzmqppGcc48 < Formula
   depends_on 'libtool' => :build
   depends_on 'pkg-config' => :build
 
-  depends_on 'Nevtep/bitcoin/zeromq2-gcc48'
+  depends_on 'Nevtep/bitcoin/czmq-gcc48'
+  #depends_on 'Nevtep/bitcoin/zeromq2-gcc48'
 
   def install
     ENV.prepend_path 'PATH', "#{HOMEBREW_PREFIX}/opt/gcc48/bin"
@@ -20,9 +21,9 @@ class CzmqppGcc48 < Formula
     ENV.cxx11
 
     # I thought depends_on zermoq-gcc48 would be enough, but I guess not...
-    zeromq2gcc48 = Formula.factory('Nevtep/bitcoin/zeromq2-gcc48')
-    ENV.append 'libczmq_CFLAG', "-I#{zeromq2gcc48.include}"
-    ENV.append 'libczmq_LIBS', "-L#{zeromq2gcc48.lib}"
+    czmqgcc48 = Formula['czmq']
+    ENV.append 'libczmq_CFLAGS', "-I#{czmqgcc48.include}"
+    ENV.append 'libczmq_LIBS', "-L#{czmqgcc48.lib}"
 
     system "autoreconf", "-i"
 
