@@ -3,7 +3,7 @@ require 'formula'
 class Electrum < Formula
   homepage 'http://electrum.org/'
   url 'https://github.com/spesmilo/electrum.git', :tag => '1.9.8'
-  head 'https://github.com/spesmilo/electrum.git', :tag => 'master'
+  head 'https://github.com/spesmilo/electrum.git', :branch => 'master'
 
   depends_on 'ecdsa' => :python
   depends_on 'pycurl' => :python
@@ -15,7 +15,11 @@ class Electrum < Formula
   def install
         system "python", "mki18n.py"
         system "pyrcc4", "icons.qrc", "-o", "gui/qt/icons_rc.py"
-        system "python", "setup.py", "install", "--prefix=#{prefix}", "--single-version-externally-managed", "--record=installed.txt"
+        system 'ARCHFLAGS="-arch i386 -arch x86_64" python setup-release.py py2app --includes sip'
+
+        cd 'dist' do
+            prefix.install "Electrum.app"
+        end
   end
 
   test do
