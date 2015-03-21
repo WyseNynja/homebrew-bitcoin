@@ -1,9 +1,9 @@
 require 'formula'
 
-class Electrum < Formula
-  homepage 'http://electrum.org/'
-  url 'https://github.com/spesmilo/electrum.git', :tag => '1.9.8'
-  head 'https://github.com/spesmilo/electrum.git', :branch => 'master'
+class ElectrumLtc < Formula
+  homepage 'http://electrum-ltc.org/'
+  url 'https://github.com/pooler/electrum-ltc.git', :tag => '1.9.8'
+  head 'https://github.com/pooler/electrum-ltc.git', :branch => 'master'
 
   depends_on 'ecdsa' => :python
   depends_on 'pycurl' => :python
@@ -18,7 +18,7 @@ class Electrum < Formula
         system 'ARCHFLAGS="-arch i386 -arch x86_64" python setup-release.py py2app --includes sip'
 
         cd 'dist' do
-            prefix.install "Electrum.app"
+            prefix.install "Electrum-LTC.app"
         end
   end
 
